@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AureClai/novatype/main/docs/static/img/logo.svg" alt="NovaType Logo" width="120" height="120">
+  <img src="https://raw.githubusercontent.com/AureClai/novatype-vscode/master/assets/logo.svg" alt="NovaType Logo" width="120" height="120">
 </p>
 
 <h1 align="center">NovaType for Visual Studio Code</h1>

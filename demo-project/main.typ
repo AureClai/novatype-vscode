@@ -33,7 +33,7 @@ As shown in @eq:softmax, the output values sum to 1.
 
 The scaled dot-product attention is defined as:
 
-$ "Attention"(Q, K, V) = "softmax"(frac(Q K^T, sqrt(d_k))) V $ <eq:attention>
+$ "Attention"(Q, K, V) = "softmax"(frac(Q K^T, sqrt(d_"model"))) V $ <eq:attention>
 
 The attention mechanism (@eq:attention) allows the model to focus on relevant parts of the input.
 
@@ -52,8 +52,14 @@ The attention mechanism (@eq:attention) allows the model to focus on relevant pa
 
 @tbl:results shows the performance comparison. For more details on BERT, see @devlin2019bert.
 
+<fig:architecture>
+
+@fig:architecture
+
 = Conclusion <sec:conclusion>
 
 The transformer architecture has enabled significant advances in NLP, as demonstrated by @brown2020language.
+
+Test référence : @Pant_2024.
 
 #bibliography("references.bib")

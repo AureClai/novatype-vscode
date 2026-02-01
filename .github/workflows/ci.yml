@@ -21,14 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Compile
+      - name: Compile TypeScript
         run: npm run compile
 
-      - name: Package extension
-        run: npx vsce package
+      - name: Package VSIX
+        run: npx vsce package --no-dependencies
 
-      - name: Upload VSIX artifact
+      - name: Upload VSIX
         uses: actions/upload-artifact@v4
         with:
-          name: novatype-vsix
+          name: novatype-${{ github.sha }}.vsix
           path: '*.vsix'
+          retention-days: 7

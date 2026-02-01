@@ -15,6 +15,13 @@
 
 = Introduction <sec:intro>
 
+This article is made using NovaType
+
+#figure(
+  image("logo.png", width: 25%),
+  caption: [Logo of NovaType]
+) <fig:logo>
+
 Deep learning has revolutionized artificial intelligence in recent years.
 The transformer architecture @vaswani2017attention has become the foundation
 of modern language models.
@@ -33,7 +40,7 @@ As shown in @eq:softmax, the output values sum to 1.
 
 The scaled dot-product attention is defined as:
 
-$ "Attention"(Q, K, V) = "softmax"(frac(Q K^T, sqrt(d_"model"))) V $ <eq:attention>
+$ "Attention"(Q, K, V) = "softmax"(frac(Q K^T, sqrt(d_k))) V $ <eq:attention>
 
 The attention mechanism (@eq:attention) allows the model to focus on relevant parts of the input.
 
@@ -52,14 +59,12 @@ The attention mechanism (@eq:attention) allows the model to focus on relevant pa
 
 @tbl:results shows the performance comparison. For more details on BERT, see @devlin2019bert.
 
-<fig:architecture>
+Ref to logo : @fig:logo
 
-@fig:architecture
+Ref to GPT-4 tecnical report : @Pant_2024
 
 = Conclusion <sec:conclusion>
 
 The transformer architecture has enabled significant advances in NLP, as demonstrated by @brown2020language.
-
-Test référence : @Pant_2024.
 
 #bibliography("references.bib")

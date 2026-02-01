@@ -2,3 +2,10 @@ out/
 node_modules/
 *.vsix
 .vscode-test/
+
+# Preview files
+*.preview.pdf
+
+# OS files
+.DS_Store
+Thumbs.db

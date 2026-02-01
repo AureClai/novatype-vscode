@@ -58,6 +58,18 @@
       {
         "command": "novatype.compileAndOpen",
         "title": "NovaType: Compile and Open PDF"
+      },
+      {
+        "command": "novatype.configure",
+        "title": "NovaType: Configure Extension"
+      },
+      {
+        "command": "novatype.searchBibliography",
+        "title": "NovaType: Search Bibliography (CrossRef)"
+      },
+      {
+        "command": "novatype.insertDOI",
+        "title": "NovaType: Insert BibTeX from DOI"
       }
     ],
     "menus": {
@@ -81,6 +93,18 @@
         "key": "ctrl+shift+b",
         "mac": "cmd+shift+b",
         "when": "editorLangId == typst"
+      },
+      {
+        "command": "novatype.searchBibliography",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorLangId == typst"
+      },
+      {
+        "command": "novatype.insertDOI",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorLangId == typst"
       }
     ],
     "configuration": {
@@ -90,6 +114,16 @@
           "type": "string",
           "default": "",
           "markdownDescription": "Path to local NovaType binary (for development). Leave empty to use the installed version from PATH."
+        },
+        "novatype.preview.backend": {
+          "type": "string",
+          "enum": ["builtin", "vscode-pdf"],
+          "enumDescriptions": [
+            "Built-in PDF.js viewer in a webview panel",
+            "Open PDF with vscode-pdf extension (better navigation, bookmarks)"
+          ],
+          "default": "builtin",
+          "description": "PDF preview backend"
         },
         "novatype.preview.autoRefresh": {
           "type": "boolean",

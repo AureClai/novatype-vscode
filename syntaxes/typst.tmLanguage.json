@@ -1,0 +1,119 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Typst",
+  "scopeName": "source.typst",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#math" },
+    { "include": "#markup" },
+    { "include": "#code" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.typst",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.typst",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "math": {
+      "patterns": [
+        {
+          "name": "markup.math.typst",
+          "begin": "\\$",
+          "end": "\\$",
+          "patterns": [
+            {
+              "name": "keyword.operator.math.typst",
+              "match": "[+\\-*/=<>^_]"
+            },
+            {
+              "name": "constant.numeric.typst",
+              "match": "\\b\\d+(\\.\\d+)?\\b"
+            },
+            {
+              "name": "support.function.math.typst",
+              "match": "\\b(sin|cos|tan|log|ln|exp|sqrt|sum|prod|integral|lim|inf|pi|alpha|beta|gamma|delta|epsilon|theta|lambda|mu|sigma|omega|phi|psi)\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "markup": {
+      "patterns": [
+        {
+          "name": "markup.heading.typst",
+          "match": "^\\s*(=+)\\s+.*$"
+        },
+        {
+          "name": "markup.bold.typst",
+          "begin": "\\*",
+          "end": "\\*"
+        },
+        {
+          "name": "markup.italic.typst",
+          "begin": "_",
+          "end": "_"
+        },
+        {
+          "name": "markup.raw.typst",
+          "begin": "`",
+          "end": "`"
+        },
+        {
+          "name": "markup.list.unnumbered.typst",
+          "match": "^\\s*-\\s+"
+        },
+        {
+          "name": "markup.list.numbered.typst",
+          "match": "^\\s*\\+\\s+"
+        },
+        {
+          "name": "markup.quote.typst",
+          "match": "^\\s*>\\s+"
+        }
+      ]
+    },
+    "code": {
+      "patterns": [
+        {
+          "name": "keyword.control.typst",
+          "match": "#(if|else|for|while|let|set|show|import|include|return|break|continue)\\b"
+        },
+        {
+          "name": "support.function.typst",
+          "match": "#[a-zA-Z_][a-zA-Z0-9_]*"
+        },
+        {
+          "name": "string.quoted.double.typst",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.typst",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "constant.numeric.typst",
+          "match": "\\b\\d+(\\.\\d+)?(pt|mm|cm|in|em|%)?\\b"
+        },
+        {
+          "name": "constant.language.typst",
+          "match": "\\b(true|false|none)\\b"
+        },
+        {
+          "name": "variable.other.typst",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}

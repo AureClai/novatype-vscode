@@ -1,0 +1,135 @@
+{
+  "name": "novatype",
+  "displayName": "NovaType",
+  "description": "NovaType/Typst document support with live preview",
+  "version": "0.1.0",
+  "publisher": "aureclai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AureClai/novatype-vscode"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "typst",
+    "novatype",
+    "latex",
+    "document",
+    "pdf",
+    "typesetting"
+  ],
+  "activationEvents": [
+    "onLanguage:typst"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "typst",
+        "aliases": ["Typst", "typst", "NovaType"],
+        "extensions": [".typ"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "typst",
+        "scopeName": "source.typst",
+        "path": "./syntaxes/typst.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "novatype.preview",
+        "title": "NovaType: Open Preview",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "novatype.compile",
+        "title": "NovaType: Compile to PDF"
+      },
+      {
+        "command": "novatype.compileAndOpen",
+        "title": "NovaType: Compile and Open PDF"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "editorLangId == typst",
+          "command": "novatype.preview",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "novatype.preview",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "editorLangId == typst"
+      },
+      {
+        "command": "novatype.compile",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b",
+        "when": "editorLangId == typst"
+      }
+    ],
+    "configuration": {
+      "title": "NovaType",
+      "properties": {
+        "novatype.binaryPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to local NovaType binary (for development). Leave empty to use the installed version from PATH."
+        },
+        "novatype.preview.autoRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically refresh preview on save"
+        },
+        "novatype.preview.refreshDelay": {
+          "type": "number",
+          "default": 300,
+          "description": "Delay in ms before refreshing preview after typing"
+        },
+        "novatype.compile.outputFormat": {
+          "type": "string",
+          "enum": ["pdf", "svg"],
+          "default": "pdf",
+          "description": "Default output format for compilation"
+        },
+        "novatype.compile.openAfterCompile": {
+          "type": "boolean",
+          "default": true,
+          "description": "Open the PDF after compilation"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "Raw Block": {
+    "prefix": ["```", "raw", "code"],
+    "body": [
+      "```${1:lang}",
+      "$0",
+      "```"
+    ],
+    "description": "Raw code block"
+  },
+  "Raw Block (Typst)": {
+    "prefix": ["rawtyp"],
+    "body": [
+      "```typst",
+      "$0",
+      "```"
+    ],
+    "description": "Raw Typst code block"
+  },
+  "Raw Inline": {
+    "prefix": ["rawinline"],
+    "body": "`${1:code}`",
+    "description": "Inline raw text"
+  },
+  "Equation Inline": {
+    "prefix": ["eq", "equation"],
+    "body": "$ ${1:expression} $ <eq:${2:name}>",
+    "description": "Inline equation with label"
+  },
+  "Equation Block": {
+    "prefix": ["eqb", "equation-block"],
+    "body": [
+      "$ ${1:expression} $ <eq:${2:name}>"
+    ],
+    "description": "Display equation with label"
+  },
+  "Figure": {
+    "prefix": ["fig", "figure"],
+    "body": [
+      "#figure(",
+      "  ${1:content},",
+      "  caption: [${2:caption}]",
+      ") <fig:${3:name}>"
+    ],
+    "description": "Figure with caption and label"
+  },
+  "Email": {
+    "prefix": ["mail", "email"],
+    "body": "${1:user}\\@${2:domain}.${3:com}",
+    "description": "Email address with escaped @"
+  },
+  "Link": {
+    "prefix": ["url", "link"],
+    "body": "#link(\"${1:https://}\")[${2:text}]",
+    "description": "Hyperlink"
+  },
+  "Table": {
+    "prefix": ["tbl", "table"],
+    "body": [
+      "#figure(",
+      "  table(",
+      "    columns: ${1:2},",
+      "    ${2:content}",
+      "  ),",
+      "  caption: [${3:caption}]",
+      ") <tbl:${4:name}>"
+    ],
+    "description": "Table with caption and label"
+  }
+}

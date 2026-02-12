@@ -24,12 +24,13 @@
 </p>
 
 <p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-installation">Installation</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-intellisense">IntelliSense</a> •
-  <a href="#-bibliography">Bibliography</a> •
-  <a href="#%EF%B8%8F-configuration">Configuration</a>
+  <a href="#features">Features</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#code-intelligence">Code Intelligence</a> •
+  <a href="#bibliography">Bibliography</a> •
+  <a href="#visual-table-editor">Table Editor</a> •
+  <a href="#configuration">Configuration</a>
 </p>
 
 ---
@@ -45,20 +46,55 @@
 ## Features
 
 ### Live Preview
-Real-time PDF preview that updates as you type. Choose between the built-in viewer or leverage the powerful [vscode-pdf](https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf) extension for advanced navigation.
+Real-time PDF preview that updates on save. The preview compiles the project's main file (detected via `nova.toml`), so editing any file in the project triggers a correct compilation. Choose between the built-in viewer or the [vscode-pdf](https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf) extension.
+
+### Code Intelligence
+- **Document Outline** — Hierarchical view of headings, labels, and imports in the Explorer sidebar
+- **Go to Definition** (`Ctrl+Click`) — Jump to `<label>` definitions, `#let` bindings, `#import` sources, and `.bib` entries
+- **Find All References** (`Shift+F12`) — Find every usage of a label, reference, or `#let` identifier across all project files
+- **Inline Diagnostics** — Compilation errors and warnings displayed directly in the editor
+- **Unescaped `@` Detection** — Warns about unescaped `@` in emails with one-click quick fix
+- **Code Folding** — Fold headings, raw blocks, and block comments
 
 ### Smart IntelliSense
 - **Reference Completion** — Type `@` to see all labels and citations
 - **Label Snippets** — Type `<` to insert structured labels (`eq:`, `fig:`, `tbl:`, etc.)
 - **Bibliography Integration** — Automatic parsing of `.bib` files referenced in your document
 
+### Snippets
+
+Quickly insert common Typst structures:
+
+| Prefix | Description |
+|--------|-------------|
+| `` ``` ``, `raw`, `code` | Raw block with language |
+| `eq`, `equation` | Inline equation with label |
+| `eqb` | Block equation with label |
+| `fig` | Figure with caption and label |
+| `tbl` | Table figure with caption and label |
+| `mail`, `email` | Email address with escaped `\@` |
+| `url`, `link` | Hyperlink with `#link()` |
+
 ### Bibliography Management
-- **CrossRef Search** — Search millions of academic papers directly from VS Code
-- **DOI Import** — Paste any DOI to instantly fetch and insert BibTeX entries
+- **CrossRef Search** (`Ctrl+Shift+R`) — Search millions of academic papers directly from VS Code
+- **DOI Import** (`Ctrl+Shift+D`) — Paste any DOI to instantly fetch and insert BibTeX entries
 - **Smart .bib Handling** — Automatic file creation and duplicate detection
 
+### Visual Table Editor
+- **Edit Table** — Click the "Edit Table" CodeLens above any `table()` to open a spreadsheet-like visual editor
+- **Create Table** — Create a table from scratch via the Command Palette
+- **Import from Excel** — Paste tab-separated data directly from Excel or Google Sheets
+- **Import CSV** — Load data from `.csv` or `.tsv` files
+- **Cell Editing** — Tab/Enter navigation, bold toggle, per-column alignment control, add/remove rows and columns
+
+### Editing Enhancements
+- **Word Wrap** — Enabled by default for `.typ` files
+- **Word Count** — Live word count displayed in the status bar
+- **List Indentation** — `Tab`/`Shift+Tab` to indent/outdent list items (`-`, `+`, `1.`)
+- **List Continuation** — `Enter` automatically continues list markers
+
 ### Developer Experience
-- Full Typst syntax highlighting
+- Full Typst syntax highlighting (improved in 0.2.0)
 - Configurable nova binary path for local development
 - Detailed output logging for debugging
 
@@ -89,7 +125,7 @@ cargo install novatype-cli
 **From VSIX:**
 
 ```bash
-code --install-extension novatype-0.1.0.vsix
+code --install-extension novatype-0.2.0.vsix
 ```
 
 ---
@@ -122,6 +158,35 @@ Press `Ctrl+Shift+B` (or `Cmd+Shift+B` on Mac) to compile your document.
 
 ---
 
+## Code Intelligence
+
+### Document Outline
+
+The Explorer sidebar shows a structured outline of your document:
+- Headings are nested hierarchically by level (`=`, `==`, `===`, ...)
+- Labels appear as children of their enclosing heading
+- `#import` statements are shown at the top level
+
+### Go to Definition (`Ctrl+Click` / `F12`)
+
+Jump to the definition of:
+- **`@ref`** — Jump to the corresponding `<label>` or `.bib` entry
+- **`#import "file.typ": name`** — Jump to the file or to the `#let` binding inside it
+- **`#let` identifiers** — Jump to the binding, even if defined in an imported file
+
+### Find All References (`Shift+F12`)
+
+Right-click any label, reference, or identifier and select "Find All References":
+- On a `<label>` — find all `@label` usages
+- On a `@ref` — find the declaration and all other usages
+- On a `#let` name — find the definition and all usages across the project
+
+### Inline Diagnostics
+
+Compilation errors and warnings from Typst are shown as squiggly underlines directly in the editor, with messages in the Problems panel. Diagnostics update each time you save.
+
+---
+
 ## IntelliSense
 
 ### Reference Completion (`@`)
@@ -135,8 +200,6 @@ Type `@` anywhere in your document to see a list of all available references:
 | Table | `@tbl:data` | Data tables |
 | Section | `@sec:intro` | Document sections |
 | Citation | `@vaswani2017attention` | Bibliography entries |
-
-References are grouped by type with rich metadata including line numbers, authors, and publication details.
 
 ### Label Snippets (`<`)
 
@@ -182,12 +245,35 @@ Have a DOI? Import it directly:
 
 ### .bib File Management
 
-The extension intelligently manages your bibliography files:
-
 - **Auto-detection** — Finds `.bib` files referenced via `#bibliography("file.bib")`
 - **Auto-creation** — Offers to create a new `.bib` file if none exists
 - **Duplicate prevention** — Checks for existing DOIs before inserting
 - **Multi-file support** — Works with multiple bibliography files
+
+---
+
+## Visual Table Editor
+
+### Edit an Existing Table
+
+A **"Edit Table"** CodeLens appears above every `table()` call in your document. Click it to open a spreadsheet-like editor where you can:
+- Edit cell contents by clicking
+- Navigate with `Tab`, `Shift+Tab`, and `Enter`
+- Toggle bold on cells
+- Change column alignment (left / center / right)
+- Add or remove rows and columns
+
+Click **Apply** to replace the table source code, or **Cancel** to discard changes.
+
+### Create a New Table
+
+Open the Command Palette (`Ctrl+Shift+P`) and run **"NovaType: Create Table"** to start with an empty 3x3 grid. Edit it in the visual editor, then Apply to insert a `#figure(table(...))` block at your cursor position.
+
+### Import from Excel or CSV
+
+In the table editor:
+- **Paste from Excel** — Copy cells in Excel or Google Sheets, then click "Paste from Excel" (or press `Ctrl+V` in the editor)
+- **Import CSV** — Click "Import CSV" to load a `.csv` or `.tsv` file from disk
 
 ---
 
@@ -235,6 +321,8 @@ For NovaType contributors, point to your local build:
 | Compile to PDF | `Ctrl+Shift+B` | `Cmd+Shift+B` |
 | Search Bibliography | `Ctrl+Shift+R` | `Cmd+Shift+R` |
 | Insert from DOI | `Ctrl+Shift+D` | `Cmd+Shift+D` |
+| Indent list item | `Tab` | `Tab` |
+| Outdent list item | `Shift+Tab` | `Shift+Tab` |
 
 ---
 
@@ -247,6 +335,8 @@ For NovaType contributors, point to your local build:
 | `NovaType: Compile and Open PDF` | Compile and open in default viewer |
 | `NovaType: Search Bibliography (CrossRef)` | Search for academic papers |
 | `NovaType: Insert BibTeX from DOI` | Import citation from DOI |
+| `NovaType: Edit Table` | Open visual editor for a table |
+| `NovaType: Create Table` | Create a new table from scratch |
 | `NovaType: Configure Extension` | Open settings menu |
 
 ---
@@ -269,6 +359,15 @@ Or set a custom binary path in settings.
 1. Check that `novatype.preview.autoRefresh` is enabled
 2. Ensure the document compiles without errors (check Output panel)
 3. Try reloading VS Code
+
+### Preview compiles the wrong file
+
+NovaType reads `nova.toml` to find the project's main file. Make sure your project has a `nova.toml` with:
+
+```toml
+[document]
+main = "main.typ"
+```
 
 ### Bibliography not showing in autocomplete
 
@@ -307,5 +406,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/AureClai">AureClai</a>
+  Made with &#10084; by <a href="https://github.com/AureClai">AureClai</a>
 </p>

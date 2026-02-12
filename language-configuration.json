@@ -28,6 +28,36 @@
     ["_", "_"],
     ["`", "`"]
   ],
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*[-+]\\s.*$|^\\s*\\d+\\.\\s.*$|.*[\\[\\(\\{]\\s*$",
+    "decreaseIndentPattern": "^\\s*[\\]\\)\\}]"
+  },
+  "onEnterRules": [
+    {
+      "beforeText": "^\\s*- .+$",
+      "action": { "indent": "none", "appendText": "- " }
+    },
+    {
+      "beforeText": "^\\s*\\+ .+$",
+      "action": { "indent": "none", "appendText": "+ " }
+    },
+    {
+      "beforeText": "^\\s*\\d+\\. .+$",
+      "action": { "indent": "none", "appendText": "1. " }
+    },
+    {
+      "beforeText": "^\\s*- $",
+      "action": { "indent": "outdent", "removeText": 2 }
+    },
+    {
+      "beforeText": "^\\s*\\+ $",
+      "action": { "indent": "outdent", "removeText": 2 }
+    },
+    {
+      "beforeText": "^\\s*\\d+\\. $",
+      "action": { "indent": "outdent", "removeText": 3 }
+    }
+  ],
   "folding": {
     "markers": {
       "start": "^\\s*//\\s*#?region\\b",

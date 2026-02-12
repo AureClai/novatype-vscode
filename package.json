@@ -38,6 +38,12 @@
         "configuration": "./language-configuration.json"
       }
     ],
+    "snippets": [
+      {
+        "language": "typst",
+        "path": "./snippets/typst.json"
+      }
+    ],
     "grammars": [
       {
         "language": "typst",
@@ -70,6 +76,14 @@
       {
         "command": "novatype.insertDOI",
         "title": "NovaType: Insert BibTeX from DOI"
+      },
+      {
+        "command": "novatype.editTable",
+        "title": "NovaType: Edit Table"
+      },
+      {
+        "command": "novatype.createTable",
+        "title": "NovaType: Create Table"
       }
     ],
     "menus": {
@@ -105,6 +119,16 @@
         "key": "ctrl+shift+d",
         "mac": "cmd+shift+d",
         "when": "editorLangId == typst"
+      },
+      {
+        "command": "novatype.list.indent",
+        "key": "tab",
+        "when": "editorLangId == typst && editorTextFocus && !editorReadonly && !suggestWidgetVisible && !editorHasSelection && !inSnippetMode"
+      },
+      {
+        "command": "novatype.list.outdent",
+        "key": "shift+tab",
+        "when": "editorLangId == typst && editorTextFocus && !editorReadonly && !suggestWidgetVisible && !inSnippetMode"
       }
     ],
     "configuration": {
@@ -146,6 +170,11 @@
           "default": true,
           "description": "Open the PDF after compilation"
         }
+      }
+    },
+    "configurationDefaults": {
+      "[typst]": {
+        "editor.wordWrap": "on"
       }
     }
   },

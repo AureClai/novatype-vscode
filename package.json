@@ -2,7 +2,7 @@
   "name": "novatype",
   "displayName": "NovaType",
   "description": "NovaType/Typst document support with live preview",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "aureclai",
   "repository": {
     "type": "git",
